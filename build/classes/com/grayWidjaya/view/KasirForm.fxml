@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderKasirForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e2f4ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grayWidjaya.controller.KasirFormController">
+   <center>
+      <TableView prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="colIdBarang" prefWidth="75.0" text="Id Barang" />
+          <TableColumn fx:id="colNamaBarang" prefWidth="75.0" text="Nama Barang" />
+            <TableColumn prefWidth="75.0" text="Jumlah Barang" />
+            <TableColumn fx:id="colHargaBarang" prefWidth="75.0" text="Harga Barang" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </center>
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="525.0" minWidth="10.0" prefWidth="298.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="525.0" minWidth="10.0" prefWidth="84.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="525.0" minWidth="3.0" prefWidth="12.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="218.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnCetakKuitansi" mnemonicParsing="false" onAction="#btnCetakKuitansi" text="Cetak Kuitansi" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <TextField fx:id="txtTotalHarga" prefHeight="25.0" prefWidth="208.0" GridPane.columnIndex="3" />
+            <Label text="Total Harga" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Pembayaran" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+            <Label text="Kembalian" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+            <Label text=":" GridPane.columnIndex="2" />
+            <Label text=":" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text=":" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txtPembayaran" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="txtKembalian" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" right="10.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </bottom>
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="90.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="222.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="203.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="58.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnTambahBarang" mnemonicParsing="false" onAction="#btnTambahBarang" text="Tambah Barang" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnReset" text="Reset" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="10.0" />
+               </GridPane.margin>
+            </Button>
+            <TextField fx:id="txtNamaBarang" GridPane.columnIndex="1" />
+            <Label text="Nama Barang" GridPane.halignment="CENTER" />
+            <Label text="Jumlah Barang" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <TextField fx:id="txtJumlahBarang" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </top>
+</BorderPane>
