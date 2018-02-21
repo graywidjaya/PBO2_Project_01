@@ -1,53 +1,77 @@
 
 package com.grayWidjaya.Entity;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
+
 /**
  *
  * @author G'ray Widjaya
  */
-public class transactionDetail {
-    private int quantity;
-    private int sellingPrice;
-    private item item;
-    private transaction transaction;
+public class TransactionDetail {
+    
+//    private int quantity;
+//    private int sellingPrice;
+//    private Item item;
+//    private Transaction transaction;
 
-    public transactionDetail(int quantity, int sellingPrice, item item, transaction transaction) {
-        this.quantity = quantity;
-        this.sellingPrice = sellingPrice;
-        this.item = item;
-        this.transaction = transaction;
-    }
+    private final IntegerProperty quantity = new SimpleIntegerProperty();
 
     public int getQuantity() {
+        return quantity.get();
+    }
+
+    public void setQuantity(int value) {
+        quantity.set(value);
+    }
+
+    public IntegerProperty quantityProperty() {
         return quantity;
     }
+    
+    private final ObjectProperty<Item> item = new SimpleObjectProperty<>();
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public Item getItem() {
+        return item.get();
     }
 
-    public int getSellingPrice() {
-        return sellingPrice;
+    public void setItem(Item value) {
+        item.set(value);
     }
 
-    public void setSellingPrice(int sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
-    public item getItem() {
+    public ObjectProperty itemProperty() {
         return item;
     }
+    
+    private final ObjectProperty<Transaction> transaction = new SimpleObjectProperty<>();
 
-    public void setItem(item item) {
-        this.item = item;
+    public Transaction getTransaction() {
+        return transaction.get();
     }
 
-    public transaction getTransaction() {
+    public void setTransaction(Transaction value) {
+        transaction.set(value);
+    }
+
+    public ObjectProperty transactionProperty() {
         return transaction;
     }
 
-    public void setTransaction(transaction transaction) {
-        this.transaction = transaction;
+    private final IntegerProperty sellingPrice = new SimpleIntegerProperty();
+
+    public int getSellingPrice() {
+        return sellingPrice.get();
+    }
+
+    public void setSellingPrice(int value) {
+        sellingPrice.set(value);
+    }
+
+    public IntegerProperty sellingPriceProperty() {
+        return sellingPrice;
     }
     
     

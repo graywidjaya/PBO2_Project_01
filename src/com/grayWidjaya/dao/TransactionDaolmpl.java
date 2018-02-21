@@ -1,6 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.grayWidjaya.dao;
 
-import com.grayWidjaya.Entity.Role;
+import com.grayWidjaya.Entity.Transaction;
 import com.grayWidjaya.utility.DBUtil;
 import com.grayWidjaya.utility.DaoService;
 import com.grayWidjaya.utility.ViewUtil;
@@ -16,19 +21,21 @@ import javafx.scene.control.Alert;
 
 /**
  *
- * @author G'ray Widjaya
+ * @author User
  */
-public class RoleDaolmpl implements DaoService<Role> {
+public class TransactionDaolmpl implements DaoService<Transaction> {
 
     @Override
-    public int addData(Role object) {
+    public int addData(Transaction object) {
         int result = 0;
         try {
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "INSERT INTO role (id, name) VALUES(?,?)";
+            String query
+                    = "INSERT INTO Transaction (id, date, payment) VALUES(?,?,?)";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1, object.getId());
-                ps.setString(2, object.getName());
+                ps.setInt(2, object.getPayment());
+                //ps.setDate(2, date); cara buat date gmn
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -42,13 +49,13 @@ public class RoleDaolmpl implements DaoService<Role> {
     }
 
     @Override
-    public int deleteData(Role object) {
+    public int deleteData(Transaction object) {
         int result = 0;
         try {
 
 //        try{
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "Delete FROM role WHERE id = ? ";
+            String query = "Delete FROM Transactio WHERE id = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, object.getId());
             if (ps.executeUpdate() != 0) {
@@ -64,14 +71,16 @@ public class RoleDaolmpl implements DaoService<Role> {
     }
 
     @Override
-    public int updateData(Role object) {
+    public int updateData(Transaction object) {
         int result = 0;
         try {
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "UPDATE role SET name = ? WHERE id = ?";
+            String query
+                    = "UPDATE Transaction SET id = ?, SET Payment = ?, SET Date = ?, WHERE id = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setString(1, object.getName());
-                ps.setInt(2, object.getId());
+                ps.setInt(1, object.getId());
+                ps.setInt(2, object.getPayment());
+                //ps.setDate(2, date); cara buat date gmn
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -84,25 +93,27 @@ public class RoleDaolmpl implements DaoService<Role> {
     }
 
     @Override
-    public List<Role> showAllData() {
-        List<Role> roles = new ArrayList<>();
+    public List<Transaction> showAllData() {
+        List<Transaction> transactions = new ArrayList<>();
         try {
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "SELECT * FROM role ORDER BY id";
+            String query = "SELECT * FROM Transaction ORDER BY id";
             try (PreparedStatement ps = connection.prepareStatement(query);
                     ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Role role = new Role();
-                    role.setId(rs.getInt("id"));
-                    role.setName(rs.getString("name"));
-                    roles.add(role);
+                    Transaction transaction = new Transaction();
+                    transaction.setId(rs.getInt("id"));
+                    transaction.setPayment(rs.getInt("Payment"));
+                    //transaction.setDate(rs.getString("Date")); cara masukin date gmn
+
+                    transactions.add(transaction);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ViewUtil.showAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
         }
 
-        return roles;
+        return transactions;
     }
 
 }

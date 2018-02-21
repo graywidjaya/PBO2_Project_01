@@ -2,56 +2,49 @@
 package com.grayWidjaya.Entity;
 
 import java.util.Date;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  *
  * @author G'ray widjaya
  */
-public class transaction {
-    private int id;
-    private Date date;
-    private int payment;
-    private transaction transaction;
+public class Transaction {
 
-    public transaction(int id, Date date, int payment) {
-        this.id = id;
-        this.date = date;
-        this.payment = payment;
-        this.transaction = transaction;
-    }
-
-    public transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(transaction transaction) {
-        this.transaction = transaction;
-    }
+//    private int id;
+//    private Date date;
+//    private int payment;
     
+    private final IntegerProperty id = new SimpleIntegerProperty();
 
     public int getId() {
+        return id.get();
+    }
+
+    public void setId(int value) {
+        id.set(value);
+    }
+
+    public IntegerProperty idProperty() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    
+    private final IntegerProperty payment = new SimpleIntegerProperty();
 
     public int getPayment() {
+        return payment.get();
+    }
+
+    public void setPayment(int value) {
+        payment.set(value);
+    }
+
+    public IntegerProperty paymentProperty() {
         return payment;
     }
 
-    public void setPayment(int payment) {
-        this.payment = payment;
-    }
+    
+    
     
     
 }

@@ -1,6 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.grayWidjaya.dao;
 
-import com.grayWidjaya.Entity.Role;
+import com.grayWidjaya.Entity.Item;
 import com.grayWidjaya.utility.DBUtil;
 import com.grayWidjaya.utility.DaoService;
 import com.grayWidjaya.utility.ViewUtil;
@@ -16,19 +21,22 @@ import javafx.scene.control.Alert;
 
 /**
  *
- * @author G'ray Widjaya
+ * @author User
  */
-public class RoleDaolmpl implements DaoService<Role> {
+public class ItemDaolmpl implements DaoService<Item> {
 
     @Override
-    public int addData(Role object) {
+    public int addData(Item object) {
         int result = 0;
         try {
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "INSERT INTO role (id, name) VALUES(?,?)";
+            String query
+                    = "INSERT INTO user (id, name, prices, stock) VALUES(?,?,?,?)";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1, object.getId());
                 ps.setString(2, object.getName());
+                ps.setInt(3, object.getPrices());
+                ps.setString(4, object.getStock());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -42,13 +50,13 @@ public class RoleDaolmpl implements DaoService<Role> {
     }
 
     @Override
-    public int deleteData(Role object) {
+    public int deleteData(Item object) {
         int result = 0;
         try {
 
 //        try{
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "Delete FROM role WHERE id = ? ";
+            String query = "Delete FROM item WHERE id = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, object.getId());
             if (ps.executeUpdate() != 0) {
@@ -64,14 +72,17 @@ public class RoleDaolmpl implements DaoService<Role> {
     }
 
     @Override
-    public int updateData(Role object) {
+    public int updateData(Item object) {
         int result = 0;
         try {
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "UPDATE role SET name = ? WHERE id = ?";
+            String query
+                    = "UPDATE User SET name = ?, SET prices = ?, SET stock = ?, WHERE id = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setString(1, object.getName());
-                ps.setInt(2, object.getId());
+                ps.setInt(1, object.getId());
+                ps.setString(2, object.getName());
+                ps.setInt(3, object.getPrices());
+                ps.setString(4, object.getStock());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -84,25 +95,27 @@ public class RoleDaolmpl implements DaoService<Role> {
     }
 
     @Override
-    public List<Role> showAllData() {
-        List<Role> roles = new ArrayList<>();
+    public List<Item> showAllData() {
+        List<Item> items = new ArrayList<>();
         try {
             Connection connection = DBUtil.createMySQLConnection();
-            String query = "SELECT * FROM role ORDER BY id";
+            String query = "SELECT * FROM Item ORDER BY id";
             try (PreparedStatement ps = connection.prepareStatement(query);
                     ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Role role = new Role();
-                    role.setId(rs.getInt("id"));
-                    role.setName(rs.getString("name"));
-                    roles.add(role);
+                    Item item = new Item();
+                    item.setId(rs.getInt("id"));
+                    item.setName(rs.getString("name"));
+                    item.setPrices(rs.getInt("Prices"));
+                    item.setStock(rs.getString("Stock"));
+                    items.add(item);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ViewUtil.showAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
         }
 
-        return roles;
+        return items;
     }
 
 }
