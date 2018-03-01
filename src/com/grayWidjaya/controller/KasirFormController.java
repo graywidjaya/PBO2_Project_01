@@ -5,6 +5,7 @@
  */
 package com.grayWidjaya.controller;
 
+import com.grayWidjaya.Entity.Item;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -29,11 +30,11 @@ public class KasirFormController implements Initializable {
     @FXML
     private TextField txtNamaBarang;
     @FXML
-    private TableColumn<?, ?> colIdBarang;
+    private TableColumn<Item, Integer> colIdBarang;
     @FXML
-    private TableColumn<?, ?> colNamaBarang;
+    private TableColumn<Item, String> colNamaBarang;
     @FXML
-    private TableColumn<?, ?> colHargaBarang;
+    private TableColumn<Item, Integer> colHargaBarang;
     @FXML
     private BorderPane borderKasirForm;
     @FXML
@@ -57,6 +58,9 @@ public class KasirFormController implements Initializable {
 
     @FXML
     private void btnReset(ActionEvent event) {
+        txtJumlahBarang.clear();
+        txtNamaBarang.clear();
+
     }
 
     @FXML
